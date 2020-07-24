@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ohbookstore.Application.Boundaries.GerarPedido
+namespace ohbookstore.Application.Boundaries
 {
-    interface IGerarPedidoSaidaPort : ISaidaPadraoPort<GerarPedidoSaida>, ISaidaNaoEncontradaPort, ISaidaErroPort
+	public interface IGerarPedidoSaidaPort : ISaidaPadraoPort<GerarPedidoSaida>, ISaidaNaoEncontradaPort, ISaidaErroPort
 	{
     }
 }

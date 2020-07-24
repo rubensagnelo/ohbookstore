@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ohbookstore.Application.Boundaries.GerarPedido
+namespace ohbookstore.Application.Boundaries
 {
-	interface IGerarPedidoUseCase : IUseCase<GerarPedidoEntrada>
+	public interface IGerarPedidoUseCase : IUseCase<GerarPedidoEntrada>
 	{
 	}
 }

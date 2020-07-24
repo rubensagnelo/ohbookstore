@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ohbookstore.Application.Boundaries.EditarLivro
+namespace ohbookstore.Application.Boundaries
 {
-	interface IEditarLivroUseCase : IUseCase<EditarLivroEntrada>
+	public interface IEditarLivroUseCase : IUseCase<EditarLivroEntrada>
 	{
 	}
 }

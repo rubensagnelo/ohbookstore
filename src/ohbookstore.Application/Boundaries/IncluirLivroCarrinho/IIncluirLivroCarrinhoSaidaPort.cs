@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ohbookstore.Application.Boundaries.IncluirLivroCarrinho
+namespace ohbookstore.Application.Boundaries
 {
-	interface IIncluirLivroCarrinhoSaidaPort : ISaidaPadraoPort<IncluirLivroCarrinhoSaida>, ISaidaNaoEncontradaPort, ISaidaErroPort
+	public interface IIncluirLivroCarrinhoSaidaPort : ISaidaPadraoPort<IncluirLivroCarrinhoSaida>, ISaidaNaoEncontradaPort, ISaidaErroPort
 	{
 	}
 }

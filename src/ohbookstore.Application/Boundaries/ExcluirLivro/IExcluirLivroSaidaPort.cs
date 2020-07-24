@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ohbookstore.Application.Boundaries.ExcluirLivro
+namespace ohbookstore.Application.Boundaries
 {
-	interface IExcluirLivroSaidaPort : ISaidaPadraoPort<ExcluirLivroSaida>, ISaidaNaoEncontradaPort, ISaidaErroPort
+	public interface IExcluirLivroSaidaPort : ISaidaPadraoPort<ExcluirLivroSaida>, ISaidaNaoEncontradaPort, ISaidaErroPort
 	{
 	}
 }

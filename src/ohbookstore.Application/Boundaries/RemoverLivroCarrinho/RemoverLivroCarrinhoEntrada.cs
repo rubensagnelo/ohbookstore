@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ohbookstore.Application.Boundaries.RemoverLivroCarrinho
+namespace ohbookstore.Application.Boundaries
 {
 	public sealed class RemoverLivroCarrinhoEntrada
 	{

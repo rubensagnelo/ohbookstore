@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ohbookstore.Application.UseCases;
+using ohbookstore.Application.Boundaries;
 
 namespace ohbookstore.WebApi
 {
@@ -58,6 +60,34 @@ namespace ohbookstore.WebApi
 					name: "default",
 					template: "{controller=Home}/{action=Index}/{id?}");
 			});
+
+			//configurarServicos();
 		}
+
+		//public void AddUseCases(IServiceCollection services) => services.
+
 	}
+
+
+
+	public static class AppExtensions {
+
+
+		private static IServiceCollection AddUseCases(this IServiceCollection services)
+		{
+			//Injeção das dependências
+			services.AddScoped<ICadastrarLivroUseCase, CadastrarLivroUseCase>();
+			services.AddScoped<IEditarLivroUseCase, EditarLivroUseCase>();
+			services.AddScoped<IExcluirLivroUseCase, ExcluirLivroUseCase>();
+			services.AddScoped<IGerarPedidoUseCase, GerarPedidoUseCase>();
+			services.AddScoped<IIncluirLivroCarrinhoUseCase, IncluirLivroNoCarrinhoUseCase>();
+			services.AddScoped<IRemoverLivroCarrinhoUseCase, RemoverLivroDoCarrinhoUseCase>();
+
+
+			return services;
+		}
+
+
+	}
+
 }

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ohbookstore.Application.Boundaries.ExcluirLivro
+namespace ohbookstore.Application.Boundaries
 {
-	interface IExcluirLivroUseCase : IUseCase<ExcluirLivroEntrada>
+	public interface IExcluirLivroUseCase : IUseCase<ExcluirLivroEntrada>
 	{
 	}
 }

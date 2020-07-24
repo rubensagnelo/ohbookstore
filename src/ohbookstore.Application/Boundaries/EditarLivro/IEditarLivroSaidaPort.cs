@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ohbookstore.Application.Boundaries.EditarLivro
+namespace ohbookstore.Application.Boundaries
 {
-	interface IEditarLivroSaidaPort : ISaidaPadraoPort<EditarLivroSaida>, ISaidaNaoEncontradaPort, ISaidaErroPort
+	public interface IEditarLivroSaidaPort : ISaidaPadraoPort<EditarLivroSaida>, ISaidaNaoEncontradaPort, ISaidaErroPort
 	{
 	}
 }
