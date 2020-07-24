@@ -6,5 +6,6 @@ namespace ohbookstore.Domain
 {
 	interface ICarrinhoRepository
 	{
+
 	}
 }
