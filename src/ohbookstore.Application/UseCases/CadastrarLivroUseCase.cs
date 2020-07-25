@@ -28,35 +28,43 @@ namespace ohbookstore.Application.UseCases
 		}
 
 
-		public async Task executar(Boundaries.CadastrarLivroEntrada entrada) {
+		public async Task Executar(CadastrarLivroEntrada entrada)
+		{
 
 			if (entrada is null)
 			{
-				this._CadastrarLivroSaidaPort.WriteError("entrada não pode ser nula");
+				this._CadastrarLivroSaidaPort.WriteError("Entrada não pode ser nula");
 				return;
 			}
 
 			ICadastroLivro CadastroLivro = await this._CadastroLivroRepository.GetCadastroLivro().ConfigureAwait(false);
 
-			//CadastroLivro.IncluirLivro(
+			if (CadastroLivro is null)
+			{
+				this._CadastrarLivroSaidaPort.WriteError("Cadastro de livros não existe.");
+				return;
+			}
 
-			//if (entrada is null)
-			//{
-			//	this. _closeAccountOutputPort
-			//		.WriteError(Messages.InputIsNull);
-			//	return;
-			//}
 
-			Boundaries.CadastrarLivroSaida result = new Boundaries.CadastrarLivroSaida();
+			ILivro livro = await this._CadastroLivroService.CadastrarLivro(CadastroLivro,
+				new Livro()
+				{
+					autor = entrada.autor,
+					isbn = entrada.isbn,
+					nome = entrada.nome,
+					preco = entrada.preco
+				});
 
-			
-			//var output = new Boundaries.CadastrarLivroSaida(id);
+
+			await this._unitOfWork.Save().ConfigureAwait(false);
+
+			this.BuildOutput(livro.isbn.id);
 		}
 
-		public Task Executar(CadastrarLivroEntrada entrada)
+		private void BuildOutput(string iSBN)
 		{
-
-			throw new NotImplementedException();
+			var output = new CadastrarLivroSaida(iSBN);
+			this._CadastrarLivroSaidaPort.Standard(output);
 		}
 	}
 }

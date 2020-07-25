@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ohbookstore.Domain;
+using ohbookstore.Application.Boundaries;
 
 
 namespace ohbookstore.WebApi.Controllers
@@ -12,8 +14,26 @@ namespace ohbookstore.WebApi.Controllers
     [ApiController]
     public class LivroController : ControllerBase
     {
-        // GET: api/Livro
-        [HttpGet]
+
+
+		public  async Task<IActionResult > Cadastrar(
+		[FromServices] CadastrarLivroPresenter presenter,
+		[FromForm] CadastrarLivroRequest request)
+		{
+
+			var input = new CadastrarLivroEntrada(new ISBN(request.isbn), request.nome, request.preco, request.autor);
+
+			/* Mediator não funciona na minha versão de VSS2017 pq precisa de .net core acima de 2.1 */
+			/*
+			await mediator.PublishAsync(input)
+				.ConfigureAwait(false); */
+
+			return presenter.ViewModel;
+		}
+
+
+		// GET: api/Livro
+		[HttpGet]
         public IEnumerable<string> Get()
         {
 			
@@ -30,9 +50,9 @@ namespace ohbookstore.WebApi.Controllers
 
         // POST: api/Livro
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] CadastrarLivroEntrada value)
         {
-			//Application.UseCases.CadastrarLivroUseCase
+
 
 		}
 
@@ -49,20 +69,7 @@ namespace ohbookstore.WebApi.Controllers
         }
 
 
-		//public async Task<IActionResult> Deposit(
-		//[FromServices] IMediator mediator, [FromServices] DepositPresenter presenter,
-		//[FromForm][Required] DepositRequest request)
-		//{
-		//	var input = new DepositInput(
-		//		request.AccountId,
-		//		request.Amount,
-		//		request.Currency);
 
-		//	await mediator.PublishAsync(input)
-		//		.ConfigureAwait(false);
-
-		//	return presenter.ViewModel!;
-		//}
 
 	}
 }

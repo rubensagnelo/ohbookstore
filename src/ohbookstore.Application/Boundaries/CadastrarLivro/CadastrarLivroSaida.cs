@@ -6,6 +6,12 @@ namespace ohbookstore.Application.Boundaries
 {
 	public sealed class CadastrarLivroSaida
 	{
+		public string ISBN { get; }
+
+		public CadastrarLivroSaida(string iSBN)
+		{
+			ISBN = iSBN;
+		}
 
 	}
 }

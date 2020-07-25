@@ -7,12 +7,19 @@ namespace ohbookstore.Application.Boundaries
 {
 	public sealed class CadastrarLivroEntrada
 	{
-		public CadastrarLivroEntrada(Livro livro)
-		{
-			Livro = livro;
-		}
 
-		public Domain.Livro Livro { get; }
+		public ISBN isbn { get; set; }
+		public string nome { get; set; }
+		public decimal preco { get; set; }
+		public String autor { get; set; }
+
+		public CadastrarLivroEntrada(ISBN isbn, string nome, decimal preco, string autor)
+		{
+			this.isbn = isbn;
+			this.nome = nome;
+			this.preco = preco;
+			this.autor = autor;
+		}
 
 	}
 }

@@ -18,7 +18,9 @@ namespace ohbookstore.Domain
 		public string item { get { return getitem(); } }
 		public string digito { get { return getitem(); } }
 
-
+		public ISBN(string Id) {
+			id = Id;
+		}
 
 		const short tamanhoISBN = 13;
 
