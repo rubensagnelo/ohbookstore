@@ -14,7 +14,7 @@ using ohbookstore.Application.Boundaries;
 
 namespace ohbookstore.WebApi
 {
-	public class Startup
+	public sealed  class Startup
 	{
 		public Startup(IConfiguration configuration)
 		{

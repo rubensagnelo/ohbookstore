@@ -11,7 +11,7 @@ namespace ohbookstore.Domain
 		///  id: International Standard Book Number
 		/// </summary>
 		private string _id;
-		public string id { get { return _id; } set { _id = value; } }
+		public string id { get { return _id; } set { setid(value); } }
 
 		public string grupo { get { return getgrupo(); } }
 		public string editor { get { return geteditor(); } }

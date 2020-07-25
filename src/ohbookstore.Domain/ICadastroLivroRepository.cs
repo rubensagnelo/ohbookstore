@@ -8,10 +8,9 @@ namespace ohbookstore.Domain
 {
 	public interface ICadastroLivroRepository
 	{
-		Task<ILivro> GetLivro(string isbnID);
-		Task<ILivro> GetBy(ISBN isbn);
-		Task Add(ILivro livro);
-		Task Update(ILivro livro);
-		Task Delete(ILivro livro);
+		Task<ICadastroLivro> GetCadastroLivro();
+		Task Add(ICadastroLivro CadastroLivro, ILivro livro);
+		Task Update(ICadastroLivro CadastroLivro, ILivro livro);
+		Task Delete(ICadastroLivro CadastroLivro, ILivro livro);
 	}
 }

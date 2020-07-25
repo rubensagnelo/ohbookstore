@@ -7,10 +7,10 @@ namespace ohbookstore.Domain
 	public interface ICadastroLivro
 	{
 
-		ILivro IncluirLivro(ICadastroLivroFactory eitidadeFactory, Livro Livro);
-		bool ExcluirLivro(ICadastroLivroFactory eitidadeFactory, Livro Livro);
-		ILivro ALterarLivro(ICadastroLivroFactory eitidadeFactory, Livro Livro);
-		ILivros GetLivros(ICadastroLivroFactory eitidadeFactory, int IdCadastro);
+		ILivro IncluirLivro(ICadastroLivroFactory entidadeFactory, Livro Livro);
+		bool ExcluirLivro(ICadastroLivroFactory entidadeFactory, Livro Livro);
+		ILivro ALterarLivro(ICadastroLivroFactory entidadeFactory, Livro Livro);
+		ILivros GetLivros(ICadastroLivroFactory entidadeFactory, int IdCadastro);
 
 
 	}

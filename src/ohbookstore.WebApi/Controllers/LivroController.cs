@@ -16,6 +16,8 @@ namespace ohbookstore.WebApi.Controllers
         [HttpGet]
         public IEnumerable<string> Get()
         {
+			Application.Boundaries.RemoverLivroCarrinhoEntrada ent;
+			ent.
             return new string[] { "value1", "value2" };
         }
 

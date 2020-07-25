@@ -14,12 +14,17 @@
 		/// </summary>
 		public static IServiceCollection AddMediator(this  IServiceCollection services)
 		{
+			//services.AddTransient
 
-			//services.AddMediator(
-			//services.AddFluentMediator(
-			//	builder =>
-			//	{
-			//		builder.On<CloseAccountInput>().PipelineAsync()
+			//Mediatr
+			////services.Madia
+			////services.AddMediator(
+
+
+			////services.AddFluentMediator(
+			//services.AddMediator( builder =>
+			//{
+			//	builder.On<CloseAccountInput>().PipelineAsync()
 			//			.Call<ICloseAccountUseCase>((handler, request) => handler.Execute(request));
 
 			//		builder.On<DepositInput>().PipelineAsync()

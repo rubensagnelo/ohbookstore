@@ -8,8 +8,8 @@ namespace ohbookstore.Domain
 	{
 		ICadastroLivro NovoCadastroLivros(Int32 idcadastroLivro);
 		ILivro NovoLivro(ICadastroLivro cadastrolivro, Livro livro);
-		bool RemoveLivro(ICadastroLivro cadastrolivro, Livro livro);
-
+		bool RemoveLivro(ICadastroLivro cadastrolivro, string isbn);
+		bool AlterarLivro(ICadastroLivro cadastrolivro, Livro livro);
 
 	}
 }
