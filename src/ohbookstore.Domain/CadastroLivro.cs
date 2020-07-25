@@ -39,8 +39,8 @@ namespace ohbookstore.Domain
 			}
 
 
-			//result = entidadeFactory.RemoveLivro(this, Livro)
-			 //if (result)
+			result = entidadeFactory.RemoveLivro(this, Livro);
+			if (result)
 				Livros.Remove(livro);
 
 			return result;
