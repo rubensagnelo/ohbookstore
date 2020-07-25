@@ -4,8 +4,7 @@ using System.Text;
 
 namespace ohbookstore.Domain
 {
-	public class Carrinho : dominiobase, ICarrinho
+	interface ICarrinhoFactory
 	{
-		public Livros Livros { get; set; }
 	}
 }

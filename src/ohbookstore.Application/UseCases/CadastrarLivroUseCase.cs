@@ -8,12 +8,27 @@ namespace ohbookstore.Application.UseCases
 {
 	public sealed class CadastrarLivroUseCase : Boundaries.ICadastrarLivroUseCase
 	{
-		public CadastrarLivroUseCase()
-		{
-		}
+
+		ohbookstore.Domain.ICadastroLivroRepository _CadastroLivroRepository;
+
+
+		//public CadastrarLivroUseCase(
+		//	ICadastrarLivroSaidaPort cadastrarLivroSaidaPort,
+		//	ohbookstore.Domain.
+
+		//	)
+		//{
+		//}
 
 		public async Task executar(Boundaries.CadastrarLivroEntrada entrada) {
-					   
+
+			//if (entrada is null)
+			//{
+			//	this. _closeAccountOutputPort
+			//		.WriteError(Messages.InputIsNull);
+			//	return;
+			//}
+
 			Boundaries.CadastrarLivroSaida result = new Boundaries.CadastrarLivroSaida();
 
 			

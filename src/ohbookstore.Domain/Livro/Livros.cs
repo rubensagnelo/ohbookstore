@@ -5,8 +5,8 @@ using System.Text;
 
 namespace ohbookstore.Domain
 {
-    public class Livros : List<ILivro>
-    {
+    public class Livros : List<ILivro>, ILivros
+	{
 
 		public Decimal GetPrecoTotal()
 		{

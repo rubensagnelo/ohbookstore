@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ohbookstore.Domain
 {
-	public class ISBN : dominiobase
+	public class ISBN : dominiobase, IISBN
 	{
 
 		/// <summary>

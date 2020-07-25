@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ohbookstore.Domain
 {
-	interface ICarrinhoRepository
+	public interface ICarrinhoRepository
 	{
 
 	}

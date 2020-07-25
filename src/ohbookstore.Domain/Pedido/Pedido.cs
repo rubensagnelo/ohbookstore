@@ -4,7 +4,9 @@ using System.Text;
 
 namespace ohbookstore.Domain
 {
-	class Pedido
+	public class Pedido : dominiobase
 	{
+
+		public Livros livros { get; set; }
 	}
 }
