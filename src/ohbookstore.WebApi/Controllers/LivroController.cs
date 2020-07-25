@@ -15,6 +15,16 @@ namespace ohbookstore.WebApi.Controllers
     public class LivroController : ControllerBase
     {
 
+		// POST: api/Livro
+		[HttpPost]
+		public object CadastrarLivro([FromBody] CadastrarLivroRequest request)
+		{
+			var input = new CadastrarLivroEntrada(request.isbn, request.nome, request.preco, request.autor);
+
+			return input;
+
+		}
+
 		[HttpPost]
 		public async Task<IActionResult> Cadastrar(
 		[FromServices] CadastrarLivroPresenter presenter,
@@ -23,7 +33,7 @@ namespace ohbookstore.WebApi.Controllers
 
 			var input = new CadastrarLivroEntrada(request.isbn, request.nome, request.preco, request.autor);
 
-			/* Mediator não funciona na minha versão de VSS2017 pq precisa de .net core acima de 2.1 */
+			/* mediator não funciona na minha versão de VSS2017 pq precisa de .net core acima de 2.1 */
 			/*
 			await mediator.PublishAsync(input)
 				.ConfigureAwait(false); */
@@ -32,6 +42,38 @@ namespace ohbookstore.WebApi.Controllers
 			return presenter.ViewModel;
 
 		}
+
+
+		// DELETE: api/ApiWithActions/5
+		[HttpDelete]
+		public Object Delete(string isbn)
+		{
+			var input = new ExcluirLivroEntrada(isbn);
+
+			return input;
+		}
+
+
+		[HttpPost]
+		public async Task<IActionResult> Delete(
+				[FromServices] CadastrarLivroPresenter presenter,
+				[FromForm] CadastrarLivroRequest request)
+		{
+
+			var input = new ExcluirLivroEntrada(request.isbn);
+
+			/* mediator não funciona na minha versão de VSS2017 pq precisa de .net core acima de 2.1 */
+			/*
+			await mediator.PublishAsync(input)
+				.ConfigureAwait(false); */
+
+			return presenter.ViewModel;
+
+		}
+
+
+
+
 
 
 		// GET: api/Livro
@@ -50,15 +92,7 @@ namespace ohbookstore.WebApi.Controllers
             return "value";
         }
 
-        // POST: api/Livro
-        [HttpPost]
-        public object CadastrarLivro([FromBody] CadastrarLivroRequest request)
-        {
-			var input = new CadastrarLivroEntrada(request.isbn, request.nome, request.preco, request.autor);
 
-			return input;
-
-		}
 
 		//// PUT: api/Livro/5
 		//[HttpPut("{id}")]

@@ -6,5 +6,12 @@ namespace ohbookstore.Application.Boundaries
 {
 	public sealed class ExcluirLivroSaida
 	{
+		public string ISBN { get; }
+
+		public ExcluirLivroSaida(string iSBN)
+		{
+			ISBN = iSBN;
+		}
+
 	}
 }

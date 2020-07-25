@@ -36,7 +36,7 @@ namespace ohbookstore.Domain
 			return livro;
 		}
 
-		public async Task<ILivro> EcluirLivro(ICadastroLivro CadastroLivro, Livro Livro)
+		public async Task<ILivro> ExcluirLivro(ICadastroLivro CadastroLivro, Livro Livro)
 		{
 			if (CadastroLivro is null)
 			{
