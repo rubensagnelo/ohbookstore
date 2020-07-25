@@ -8,10 +8,10 @@ namespace ohbookstore.Domain
 	public interface ICarrinhoRepository
 	{
 		Task Add(ICarrinho carrinho);
-		Task Remover(ICarrinho carrinho);
+		Task Delete(ICarrinho carrinho);
 
-		Task Add(ICarrinho carrinho, ILivro livro);
-		Task Delete(ICadastroLivro CadastroLivro, ILivro livro);
+		Task AddLivro(ICarrinho carrinho, ILivro livro);
+		Task DeleteLivro(ICadastroLivro CadastroLivro, ILivro livro);
 
 	}
 }
