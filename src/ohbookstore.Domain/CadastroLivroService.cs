@@ -61,7 +61,7 @@ namespace ohbookstore.Domain
 
 
 
-		public async Task<ILivro> Alterar(ICadastroLivro CadastroLivro, Livro Livro)
+		public async Task<ILivro> AlterarLivro(ICadastroLivro CadastroLivro, Livro Livro)
 		{
 			if (CadastroLivro is null)
 			{

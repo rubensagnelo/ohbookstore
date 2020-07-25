@@ -19,9 +19,10 @@ namespace ohbookstore.WebApi.Controllers
 		[HttpPost]
 		public object CadastrarLivro([FromBody] CadastrarLivroRequest request)
 		{
-			var input = new CadastrarLivroEntrada(request.isbn, request.nome, request.preco, request.autor);
+			var result = new CadastrarLivroEntrada(request.isbn, request.nome, request.preco, request.autor);
 
-			return input;
+
+			return result;
 
 		}
 
@@ -31,14 +32,14 @@ namespace ohbookstore.WebApi.Controllers
 		[FromForm] CadastrarLivroRequest request)
 		{
 
-			var input = new CadastrarLivroEntrada(request.isbn, request.nome, request.preco, request.autor);
+			var inputmediator = new CadastrarLivroEntrada(request.isbn, request.nome, request.preco, request.autor);
 
 			/* mediator não funciona na minha versão de VSS2017 pq precisa de .net core acima de 2.1 */
 			/*
-			await mediator.PublishAsync(input)
+			await mediator.PublishAsync(inputmediator)
 				.ConfigureAwait(false); */
 
-			
+
 			return presenter.ViewModel;
 
 		}
@@ -48,9 +49,14 @@ namespace ohbookstore.WebApi.Controllers
 		[HttpDelete]
 		public Object Delete(string isbn)
 		{
-			var input = new ExcluirLivroEntrada(isbn);
+			var result = new ExcluirLivroEntrada(isbn);
 
-			return input;
+			/* mediator não funciona na minha versão de VSS2017 pq precisa de .net core acima de 2.1 */
+			/*
+			await mediator.PublishAsync(result)
+				.ConfigureAwait(false); */
+
+			return result;
 		}
 
 
@@ -60,18 +66,30 @@ namespace ohbookstore.WebApi.Controllers
 				[FromForm] CadastrarLivroRequest request)
 		{
 
-			var input = new ExcluirLivroEntrada(request.isbn);
+			var inputmediator = new ExcluirLivroEntrada(request.isbn);
 
 			/* mediator não funciona na minha versão de VSS2017 pq precisa de .net core acima de 2.1 */
 			/*
-			await mediator.PublishAsync(input)
+			await mediator.PublishAsync(inputmediator)
 				.ConfigureAwait(false); */
 
 			return presenter.ViewModel;
 
 		}
 
+		// PUT: api/Livro/5
+		[HttpPut("{id}")]
+		public Object Put(int id, [FromBody] EditarLivroEntrada request)
+		{
+			var result = new EditarLivroEntrada(request.isbn.id, request.nome, request.preco, request.autor);
 
+			/* mediator não funciona na minha versão de VSS2017 pq precisa de .net core acima de 2.1 */
+			/*
+			await mediator.PublishAsync(inputmediator)
+				.ConfigureAwait(false); */
+
+			return result;
+		}
 
 
 
@@ -80,8 +98,6 @@ namespace ohbookstore.WebApi.Controllers
 		[HttpGet]
         public IEnumerable<string> GetLivros()
         {
-			
-			
             return new string[] { "value1", "value2" };
         }
 
@@ -94,11 +110,6 @@ namespace ohbookstore.WebApi.Controllers
 
 
 
-		//// PUT: api/Livro/5
-		//[HttpPut("{id}")]
-		//public void Put(int id, [FromBody] string value)
-		//{
-		//}
 
 		//// DELETE: api/ApiWithActions/5
 		//[HttpDelete("{id}")]
