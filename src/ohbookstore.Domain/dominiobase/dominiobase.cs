@@ -8,7 +8,7 @@ namespace ohbookstore.Domain
     public class dominiobase
 	{
 		private erro _erro;
-		public erro erro { get { return erro; } }
+		public erro erro { get { return _erro; } }
 
 
 		public void SetErro(Int32 id, string mensagem){

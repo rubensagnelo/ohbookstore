@@ -13,9 +13,9 @@ namespace ohbookstore.Application.Boundaries
 		public decimal preco { get; set; }
 		public String autor { get; set; }
 
-		public CadastrarLivroEntrada(ISBN isbn, string nome, decimal preco, string autor)
+		public CadastrarLivroEntrada(string isbn, string nome, decimal preco, string autor)
 		{
-			this.isbn = isbn;
+			this.isbn = new ISBN(isbn);
 			this.nome = nome;
 			this.preco = preco;
 			this.autor = autor;

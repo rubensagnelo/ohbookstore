@@ -13,13 +13,16 @@ namespace ohbookstore.Domain
 		private string _id;
 		public string id { get { return _id; } set { setid(value); } }
 
-		public string grupo { get { return getgrupo(); } }
-		public string editor { get { return geteditor(); } }
-		public string item { get { return getitem(); } }
-		public string digito { get { return getitem(); } }
+		public string EAN { get; private set; }
+		public string grupo { get; private set; } 
+		public string editor { get; private set; }
+		public string item { get; private set; } 
+		public string digito { get; private set; }
+
+
 
 		public ISBN(string Id) {
-			id = Id;
+			setid(Id);
 		}
 
 		const short tamanhoISBN = 13;
@@ -28,34 +31,38 @@ namespace ohbookstore.Domain
 			if (value.Length != tamanhoISBN)
 				SetErro(1, $"O ISBN deve ter {tamanhoISBN} caracteres.");
 			_id = value;
+			setTodos();
 		}
 
-
-		private string getgrupo() {
-			string result = string.Empty;
-
-			return result;
+		private void setEAN() {
+			EAN = _id.Substring(0, 3);
 		}
 
-		private string geteditor(){
-			string result = string.Empty;
+		private void setgrupo() {
+			grupo = _id.Substring(3, 2);
+		}
 
-			return result;
+		private void geteditor(){
+			editor = _id.Substring(5, 4);
 		}
 		
 
-		private string getitem()
+		private void getitem()
 		{
-			string result = string.Empty;
-
-			return result;
+			item = _id.Substring(9, 3);
 		}
 
-		private string getdigito()
+		private void getdigito()
 		{
-			string result = string.Empty;
+			digito = _id.Substring(12, 1);
+		}
 
-			return result;
+		private void setTodos() {
+			setEAN();
+			setgrupo();
+			geteditor();
+			getitem();
+			getdigito();
 		}
 
 
