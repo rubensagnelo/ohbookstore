@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using ohbookstore.Application.UseCases;
 using ohbookstore.Application.Boundaries;
 
+
 namespace ohbookstore.WebApi
 {
 	public sealed  class Startup
@@ -29,12 +30,28 @@ namespace ohbookstore.WebApi
 			services.Configure<CookiePolicyOptions>(options =>
 			{
 				// This lambda determines whether user consent for non-essential cookies is needed for a given request.
-				options.CheckConsentNeeded = context => true;
+				//options.CheckConsentNeeded = context => true;
+				//options.MinimumSameSitePolicy = SameSiteMode.None;
+				options.CheckConsentNeeded = context => false;
 				options.MinimumSameSitePolicy = SameSiteMode.None;
 			});
 
 
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+			////services.AddControllersWithViews();
+			//services.AddHttpContextAccessor();
+			//services.AddTransient<IUserRepository, UserRepository>();
+
+			services.AddSession(opts =>
+			{
+				opts.Cookie.IsEssential = true; // make the session cookie Essential
+			});
+
+			services.AddMvc();
+			//services.AddDistributedMemoryCache();
+			//services.AddSession();
+
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,6 +71,10 @@ namespace ohbookstore.WebApi
 			app.UseStaticFiles();
 			app.UseCookiePolicy();
 
+			var opt = new SessionOptions();
+			opt.CookieName = "abcde";
+			app.UseSession(opt);
+
 			app.UseMvc(routes =>
 			{
 				routes.MapRoute(
@@ -68,7 +89,7 @@ namespace ohbookstore.WebApi
 
 	}
 
-
+	
 
 	public static class AppExtensions {
 

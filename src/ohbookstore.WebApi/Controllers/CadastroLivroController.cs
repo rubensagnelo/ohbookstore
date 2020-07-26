@@ -21,7 +21,14 @@ namespace ohbookstore.WebApi.Controllers
 		[HttpPost]
 		public object CadastrarLivro([FromBody] CadastrarLivroRequest request)
 		{
+
 			var result = new CadastrarLivroEntrada(request.isbn, request.nome, request.preco, request.autor);
+
+			/* mediator não funciona na minha versão de VSS2017 pq precisa de .net core acima de 2.1 */
+			/*
+			await mediator.PublishAsync(result)
+				.ConfigureAwait(false); */
+
 
 
 			return result;
@@ -117,17 +124,17 @@ namespace ohbookstore.WebApi.Controllers
 
 		//// GET: api/Livro
 		//[HttpGet]
-  //      public IEnumerable<string> GetLivros()
-  //      {
-  //          return new string[] { "value1", "value2" };
-  //      }
+		//      public IEnumerable<string> GetLivros()
+		//      {
+		//          return new string[] { "value1", "value2" };
+		//      }
 
 		//// GET: api/Livro/5
 		//[HttpGet]
 		//public string GetLivro(int id)
-  //      {
-  //          return "value";
-  //      }
+		//      {
+		//          return "value";
+		//      }
 
 		//// DELETE: api/ApiWithActions/5
 		//[HttpDelete("{id}")]
@@ -135,8 +142,17 @@ namespace ohbookstore.WebApi.Controllers
 		//{
 		//}
 
+		public void gravar(string chave, object valor)
+		{
 
-	
+			HttpContext.Session.SetString(chave, Newtonsoft.Json.JsonConvert.SerializeObject(valor));
+		}
+
+		public T recuperar<T>(string chave)
+		{
+			return Newtonsoft.Json.JsonConvert.DeserializeObject<T>(HttpContext.Session.GetString(chave));
+		}
+
 
 	}
 }
