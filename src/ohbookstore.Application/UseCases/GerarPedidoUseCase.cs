@@ -9,59 +9,53 @@ namespace ohbookstore.Application.UseCases
 {
 	public class GerarPedidoUseCase : Boundaries.IGerarPedidoUseCase
 	{
-		private readonly ICadastroLivroRepository _CadastroLivroRepository;
-		private readonly CadastroLivroService _CadastroLivroService;
-		private readonly IGerarPedidoSaidaPort _CadastrarLivroSaidaPort;
+		private readonly ICarrinhoRepository _CarrinhoRepository;
+		private readonly CarrinhoService _CarrinhoService;
+		private readonly IGerarPedidoSaidaPort _GerarPedidoSaidaPort;
 		private readonly IUnitOfWork _unitOfWork;
 
 		public GerarPedidoUseCase(
-			ICadastroLivroRepository CadastroLivroRepository, 
-			CadastroLivroService CadastroLivroService, 
-			IGerarPedidoSaidaPort CadastrarLivroSaidaPort, 
+			ICarrinhoRepository CarrinhoRepository, 
+			CarrinhoService CarrinhoService, 
+			IGerarPedidoSaidaPort GerarPedidoSaidaPort, 
 			IUnitOfWork unitOfWork)
 		{
-			_CadastroLivroRepository = CadastroLivroRepository;
-			_CadastroLivroService = CadastroLivroService;
-			_CadastrarLivroSaidaPort = CadastrarLivroSaidaPort;
+			_CarrinhoRepository = CarrinhoRepository;
+			_CarrinhoService = CarrinhoService;
+			_GerarPedidoSaidaPort = GerarPedidoSaidaPort;
 			_unitOfWork = unitOfWork;
 		}
+
 
 		public async Task Executar(GerarPedidoEntrada entrada)
 		{
 			if (entrada is null)
 			{
-				this._CadastrarLivroSaidaPort.WriteError("Entrada não pode ser nula");
+				this._GerarPedidoSaidaPort.WriteError("Entrada não pode ser nula");
 				return;
 			}
 
-			ICadastroLivro CadastroLivro = await this._CadastroLivroRepository.GetCadastroLivro().ConfigureAwait(false);
+			ICarrinhoLivro CarrinhoLivro = await this._CarrinhoRepository.GetCarrinhoLivro().ConfigureAwait(false);
 
-			if (CadastroLivro is null)
+			if (CarrinhoLivro is null)
 			{
-				this._CadastrarLivroSaidaPort.WriteError("Cadastro de livros não existe.");
+				this._GerarPedidoSaidaPort.WriteError("Carrinho não existe.");
 				return;
 			}
 
-
-			//ILivro livro = await this._CadastroLivroService.CadastrarLivro(CadastroLivro,
-			//	new Livro()
-			//	{
-			//		autor = entrada.autor,
-			//		isbn = entrada.isbn,
-			//		nome = entrada.nome,
-			//		preco = entrada.preco
-			//	});
+			IPedido pedido = await this._CarrinhoService.GerarPedido(CarrinhoLivro, entrada.livros, entrada.Cliente);
 
 
-			//await this._unitOfWork.Save().ConfigureAwait(false);
+			await this._unitOfWork.Save().ConfigureAwait(false);
 
-			//this.BuildOutput(livro.isbn.id);
+			this.BuildOutput(pedido);
 		}
 
-		//private void BuildOutput(string iSBN)
-		//{
-		//	var output = new CadastrarLivroSaida(iSBN);
-		//	this._CadastrarLivroSaidaPort.Standard(output);
-		//}
+		private void BuildOutput(IPedido pedido)
+		{
+			Pedido Pedido = (Pedido)pedido;
+			var output = new GerarPedidoSaida(Pedido);
+			this._GerarPedidoSaidaPort.Standard(output);
+		}
 	}
 }

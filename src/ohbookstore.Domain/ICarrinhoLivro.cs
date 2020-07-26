@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ohbookstore.Domain
 {
@@ -10,10 +11,10 @@ namespace ohbookstore.Domain
 		ICarrinho IncluirCarrinho(ICarrinhoFactory entidadeFactory, Carrinho Carrinho);
 		bool ExcluirCarrinho(ICarrinhoFactory entidadeFactory, Carrinho Carrinho);
 
-		ICarrinho IncluirLivroCarrinho(ICarrinhoFactory entidadeFactory, Carrinho Carrinho, Livro Livro);
-		bool ExcluirLivroCarrinho(ICadastroLivroFactory entidadeFactory, Carrinho Carrinho, Livro Livro);
+		ILivro IncluirLivroCarrinho(ICarrinhoFactory entidadeFactory, Carrinho Carrinho, Livro Livro);
+		bool ExcluirLivroCarrinho(ICarrinhoFactory entidadeFactory, Carrinho Carrinho, Livro Livro);
 
-		Pedido EfetivarPedidoCarinho(ICadastroLivroFactory entidadeFactory, Livros Livros, Carrinho Carrinho);
+		IPedido EfetivarPedidoCarinho(ICarrinhoFactory entidadeFactory, Pedido Pedido);
 
 	}
 }

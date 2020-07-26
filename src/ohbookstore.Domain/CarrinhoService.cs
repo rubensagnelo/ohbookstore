@@ -16,7 +16,6 @@ namespace ohbookstore.Domain
 			_CarrinhoRepository = CarrinhoRepository;
 		}
 
-
 		public async Task<ICarrinho> CriarCarrinho(ICarrinhoLivro CarrinhoLivro, Carrinho Carrinho)
 		{
 			if (CarrinhoLivro is null)
@@ -25,7 +24,7 @@ namespace ohbookstore.Domain
 			}
 
 			ICarrinho carrinho = CarrinhoLivro.IncluirCarrinho(this._CarrinhoFactory, Carrinho);
-			await this._CarrinhoRepository.Add(carrinho).ConfigureAwait(false);
+			await this._CarrinhoRepository.Add(CarrinhoLivro, carrinho).ConfigureAwait(false);
 
 			return carrinho;
 		}
@@ -45,14 +44,104 @@ namespace ohbookstore.Domain
 			bool result = false;
 
 			result = CarrinhoLivro.ExcluirCarrinho(this._CarrinhoFactory, Carrinho);
+
 			ICarrinho carrinho = (ICarrinho)Carrinho;
-			await this._CarrinhoRepository.Delete(carrinho)
-				.ConfigureAwait(false);
+
+			if (result)
+				await this._CarrinhoRepository.Delete(CarrinhoLivro, carrinho).ConfigureAwait(false);
+			else
+				carrinho = null;
 
 			return carrinho;
 		}
 
+		public async Task<ILivro> IncluirLivroNoCarrinho(ICarrinhoLivro CarrinhoLivro, Carrinho Carrinho, Livro Livro)
+		{
+			if (CarrinhoLivro is null)
+			{
+				throw new ArgumentNullException(nameof(CarrinhoLivro));
+			}
 
+
+			if (Carrinho is null)
+			{
+				throw new ArgumentNullException(nameof(Carrinho));
+			}
+
+
+			if (Livro is null)
+			{
+				throw new ArgumentNullException(nameof(Livro));
+			}
+
+
+			ILivro livro = CarrinhoLivro.IncluirLivroCarrinho(this._CarrinhoFactory, Carrinho, Livro);
+			ICarrinho carrinho = (ICarrinho)Carrinho;
+			await this._CarrinhoRepository.AddLivro(CarrinhoLivro, carrinho, livro).ConfigureAwait(false);
+
+			return livro;
+		}
+
+		public async Task<ILivro> RemoverLivroDoCarrinho(ICarrinhoLivro CarrinhoLivro, Carrinho Carrinho, Livro Livro)
+		{
+			if (CarrinhoLivro is null)
+			{
+				throw new ArgumentNullException(nameof(CarrinhoLivro));
+			}
+
+
+			if (Carrinho is null)
+			{
+				throw new ArgumentNullException(nameof(Carrinho));
+			}
+
+
+			if (Livro is null)
+			{
+				throw new ArgumentNullException(nameof(Livro));
+			}
+
+
+			bool result = CarrinhoLivro.ExcluirLivroCarrinho(this._CarrinhoFactory, Carrinho, Livro);
+
+			ICarrinho carrinho = (ICarrinho)Carrinho;
+			ILivro livro = (ILivro)Livro;
+
+			if (result)
+				await this._CarrinhoRepository.DeleteLivro(CarrinhoLivro, carrinho, livro).ConfigureAwait(false);
+			else
+				livro = null;
+
+			return livro;
+		}
+
+
+		public async Task<IPedido> GerarPedido(ICarrinhoLivro CarrinhoLivro, Livros Livros, Pessoa Cliente)
+		{
+			if (CarrinhoLivro is null)
+			{
+				throw new ArgumentNullException(nameof(CarrinhoLivro));
+			}
+
+
+			if (Livros is null || Livros.Count<= 0)
+			{
+				throw new ArgumentNullException(nameof(Livros));
+			}
+
+
+			if (Cliente is null)
+			{
+				throw new ArgumentNullException(nameof(Cliente));
+			}
+
+			Pedido fPedido = new Pedido(Cliente, Livros, DateTime.Now); 
+
+			IPedido pedido = CarrinhoLivro.EfetivarPedidoCarinho(this._CarrinhoFactory, fPedido);
+			await this._CarrinhoRepository.AddPedido(CarrinhoLivro, pedido).ConfigureAwait(false);
+
+			return pedido;
+		}
 
 
 

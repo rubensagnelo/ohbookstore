@@ -7,11 +7,14 @@ namespace ohbookstore.Domain
 {
 	public interface ICarrinhoRepository
 	{
-		Task Add(ICarrinho carrinho);
-		Task Delete(ICarrinho carrinho);
+		Task<ICarrinhoLivro> GetCarrinhoLivro();
 
-		Task AddLivro(ICarrinho carrinho, ILivro livro);
-		Task DeleteLivro(ICadastroLivro CadastroLivro, ILivro livro);
+		Task Add(ICarrinhoLivro CarrinhoLivro, ICarrinho carrinho);
+		Task Delete(ICarrinhoLivro CarrinhoLivro, ICarrinho carrinho);
 
+		Task AddLivro(ICarrinhoLivro CarrinhoLivro, ICarrinho carrinho, ILivro livro);
+		Task DeleteLivro(ICarrinhoLivro CarrinhoLivro, ICarrinho carrinho, ILivro livro);
+
+		Task AddPedido(ICarrinhoLivro CarrinhoLivro, IPedido pedido);
 	}
 }
