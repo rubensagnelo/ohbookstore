@@ -7,13 +7,13 @@ namespace ohbookstore.Application.Boundaries
 {
 	public sealed class IncluirLivroCarrinhoEntrada
 	{
-		public Guid idCarrinho { get; set; }
+		public Carrinho Carrinho { get; set; }
 		public Livro Livro { get; set; }
 
-		public IncluirLivroCarrinhoEntrada(Guid IdCarrinho, Livro livro)
+		public IncluirLivroCarrinhoEntrada(Carrinho carrinho, Livro livro)
 		{
-			this.idCarrinho = IdCarrinho;
-			Livro = livro;
+			this.Carrinho = carrinho;
+			this.Livro = livro;
 		}
 	}
 }

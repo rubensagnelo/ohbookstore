@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ohbookstore.Domain;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,13 +7,11 @@ namespace ohbookstore.Application.Boundaries
 {
 	public sealed class RemoverLivroCarrinhoSaida
 	{
-		public Guid idCarrinho { get; set; }
-		public string isbn { get; set; }
+		public Livro Livro { get; set; }
 
-		public RemoverLivroCarrinhoSaida(Guid IdCarrinho, string isbn)
+		public RemoverLivroCarrinhoSaida(Livro livro)
 		{
-			this.idCarrinho = IdCarrinho;
-			this.isbn = isbn;
+			this.Livro = livro;
 		}
 
 	}
