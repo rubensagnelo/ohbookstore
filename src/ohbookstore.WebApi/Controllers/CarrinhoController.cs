@@ -12,44 +12,36 @@ namespace ohbookstore.WebApi.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    public class LivroController : ControllerBase
+    public class CarrinhoController : ControllerBase
     {
 
-		// POST: api/Livro
-		[HttpPost]
-		public object CadastrarLivro([FromBody] CadastrarLivroRequest request)
-		{
-			var result = new CadastrarLivroEntrada(request.isbn, request.nome, request.preco, request.autor);
+		#region Incluir Livro no Carrinho
 
+		[HttpPost]
+		public object IncluirNoCarrinho([FromBody] IncluirLivroCarrinhoEntrada request)
+		{
+			var result = new IncluirLivroCarrinhoEntrada(request.Carrinho, request.Livro);
+
+			/* mediator não funciona na minha versão de VSS2017 pq precisa de .net core acima de 2.1 */
+			/*
+			await mediator.PublishAsync(result)
+				.ConfigureAwait(false); */
 
 			return result;
 
 		}
 
-		[HttpPost]
-		public async Task<IActionResult> Cadastrar(
-		[FromServices] CadastrarLivroPresenter presenter,
-		[FromForm] CadastrarLivroRequest request)
-		{
 
-			var inputmediator = new CadastrarLivroEntrada(request.isbn, request.nome, request.preco, request.autor);
-
-			/* mediator não funciona na minha versão de VSS2017 pq precisa de .net core acima de 2.1 */
-			/*
-			await mediator.PublishAsync(inputmediator)
-				.ConfigureAwait(false); */
+		#endregion Incluir Livro no Carrinho
 
 
-			return presenter.ViewModel;
-
-		}
-
+		#region Remover Livro do carrinho
 
 		// DELETE: api/ApiWithActions/5
 		[HttpDelete]
-		public Object Delete(string isbn)
+		public Object RemoverDoCarrinho(RemoverLivroCarrinhoEntrada request)
 		{
-			var result = new ExcluirLivroEntrada(isbn);
+			var result = new RemoverLivroCarrinhoEntrada(request.Carrinho, request.Livro);
 
 			/* mediator não funciona na minha versão de VSS2017 pq precisa de .net core acima de 2.1 */
 			/*
@@ -59,23 +51,30 @@ namespace ohbookstore.WebApi.Controllers
 			return result;
 		}
 
+		#endregion Remover Livro do carrinho
+
+
+
+
 
 		[HttpPost]
-		public async Task<IActionResult> Delete(
-				[FromServices] CadastrarLivroPresenter presenter,
-				[FromForm] CadastrarLivroRequest request)
+		public object GerarPedido([FromBody] GerarPedidoEntrada request)
 		{
-
-			var inputmediator = new ExcluirLivroEntrada(request.isbn);
+			var result = new GerarPedidoEntrada(request.idPedido, request.Cliente, request.livros, DateTime.Now);
 
 			/* mediator não funciona na minha versão de VSS2017 pq precisa de .net core acima de 2.1 */
 			/*
-			await mediator.PublishAsync(inputmediator)
+			await mediator.PublishAsync(result)
 				.ConfigureAwait(false); */
 
-			return presenter.ViewModel;
+			return result;
 
 		}
+
+
+
+
+		#region Alterar Livro
 
 		// PUT: api/Livro/5
 		[HttpPut("{id}")]
@@ -91,25 +90,30 @@ namespace ohbookstore.WebApi.Controllers
 			return result;
 		}
 
+		#endregion Alterar Livro
 
 
 
-		// GET: api/Livro
-		[HttpGet]
-        public IEnumerable<string> GetLivros()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
-		// GET: api/Livro/5
-		[HttpGet]
-		public string GetLivro(int id)
-        {
-            return "value";
-        }
 
 
 
+
+
+
+
+		//// GET: api/Livro
+		//[HttpGet]
+  //      public IEnumerable<string> GetLivros()
+  //      {
+  //          return new string[] { "value1", "value2" };
+  //      }
+
+		//// GET: api/Livro/5
+		//[HttpGet]
+		//public string GetLivro(int id)
+  //      {
+  //          return "value";
+  //      }
 
 		//// DELETE: api/ApiWithActions/5
 		//[HttpDelete("{id}")]

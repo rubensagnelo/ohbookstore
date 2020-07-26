@@ -8,12 +8,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ohbookstore.WebApi.Controllers
 {
-	public class CadastrarLivroResponse 
+	public class CarrinhoResponse 
 	{
 		[Required]
 		public string iSBN { get; }
 
-		public CadastrarLivroResponse(string iSBN)
+		public CarrinhoResponse(string iSBN)
 		{
 			this.iSBN = iSBN;
 		}
